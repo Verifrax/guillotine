@@ -12,26 +12,41 @@ If output is incomplete, speculative, misaligned, or weak,
 
 ---
 
+## Philosophy
+
+Guillotine exists to **force execution where intent already exists**.
+
+It is designed for moments where:
+
+* A decision has been made
+* Delay has become avoidance
+* Reversibility is the enemy
+
+Guillotine does not help you decide.
+It ends the opportunity to hesitate.
+
+---
+
 ## Behavior
 
-- Detects any uncommitted state
-- Deletes it without inspection
-- Leaves the repository scarred
-- Exits non-zero with intent
+* Detects any uncommitted or unresolved state
+* Deletes it without inspection
+* Leaves the repository intentionally scarred
+* Exits non-zero with intent
 
-No retries.  
-No previews.  
+No retries.
+No previews.
 No recovery.
 
 ---
 
 ## Non-Features
 
-- No flags
-- No modes
-- No config
-- No safety
-- No discussion
+* No flags
+* No modes
+* No configuration
+* No safety
+* No discussion
 
 Anything reversible is rejected by design.
 
@@ -39,8 +54,13 @@ Anything reversible is rejected by design.
 
 ## Usage
 
-Drop `guillotine.sh` into a git repository.  
+Drop `guillotine.sh` into a git repository.
+
 Run it.
+
+```sh
+./guillotine.sh
+```
 
 If you pause, abort.
 
@@ -50,9 +70,9 @@ If you pause, abort.
 
 You run Guillotine knowing:
 
-- loss is expected
-- responsibility is yours
-- blame is invalid
+* loss is expected
+* responsibility is yours
+* blame is invalid
 
 Discomfort is confirmation.
 
