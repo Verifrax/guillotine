@@ -8,13 +8,13 @@ set -eu
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 2
 
 # Null-delimited, space-safe
-DIRTY="$(git status --porcelain=v1 -z)"
+git status --porcelain=v1 -z | while IFS= read -r -d '' entry; do
+  status=${entry%% *}
+  path=${entry#?? }
 
-# Clean state: nothing to cut
-[ -z "$DIRTY" ] && exit 0
+  # Skip deletions already staged or removed
+  [ "$status" = "D" ] && continue
 
-printf '%s' "$DIRTY" | while IFS= read -r -d '' entry; do
-  path="${entry#??}"
   rm -rf -- "$path"
 done
 
