@@ -1,4 +1,15 @@
-# GUILLOTINE
+```
+PRIM-001
+GUILLOTINE
+Irreversible execution
+
+STATUS: REGISTERED
+REGISTRY: https://speedkit.eu
+```
+
+Registered artifact. Identity governed by SPEEDKIT registry.
+
+---
 
 Guillotine enforces decisions you already made and failed to execute.
 
