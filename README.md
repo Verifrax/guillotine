@@ -1,111 +1,46 @@
-```
-PRIM-001
-GUILLOTINE
-Irreversible execution
+# guillotine
 
-STATUS: REGISTERED
-REGISTRY: https://speedkit.eu
-SNAPSHOT: https://speedkit.eu/REGISTRY_SNAPSHOT.json
-```
+## Purpose
 
-Registered artifact. Identity governed by SPEEDKIT registry.
+Atomic primitive: hard cutoff / final dismissal mechanism.
 
-STATUS: FINAL
+## Status
 
----
+- **Stability**: Experimental
+- **SemVer**: Not guaranteed until v1.0.0
+- **Security**: See **Security** section below
 
-Guillotine enforces decisions you already made and failed to execute.
+## Scope
 
-It is a **Claude Code–native execution utility**.
-It is not configurable.
-It does not ask questions.
-It does not wait for certainty.
+- What this repo is responsible for
+- What it explicitly does **not** do
 
-If output is incomplete, speculative, misaligned, or weak,
-**Guillotine deletes it. Immediately. Permanently.**
+## Quickstart
 
----
+```bash
+# clone
+git clone https://github.com/Verifrax/guillotine.git
+cd guillotine
 
-## Philosophy
-
-Guillotine exists to **force execution where intent already exists**.
-
-It is designed for moments where:
-
-* A decision has been made
-* Delay has become avoidance
-* Reversibility is the enemy
-
-Guillotine does not help you decide.
-It ends the opportunity to hesitate.
-
----
-
-## Behavior
-
-* Detects any uncommitted or unresolved state
-* Deletes it without inspection
-* Leaves the repository intentionally scarred
-* Exits non-zero with intent
-
-No retries.
-No previews.
-No recovery.
-
----
-
-## Non-Features
-
-* No flags
-* No modes
-* No configuration
-* No safety
-* No discussion
-
-Anything reversible is rejected by design.
-
----
-
-## Usage
-
-Drop `guillotine.sh` into a git repository.
-
-Run it.
-
-```sh
-./guillotine.sh
+# install (adjust if needed)
+# (placeholder) npm install / pnpm install / go test ./... / etc.
 ```
 
-If you pause, abort.
+## Repository layout
 
----
+- `/` Root sources
+- `/.github/` Issue + PR templates
+- `/docs/` Documentation (if present)
 
-## Contract
+## Security
 
-You run Guillotine knowing:
+- Report vulnerabilities privately: **security@verifrax.org**
+- Do **not** open public issues for sensitive findings
 
-* loss is expected
-* responsibility is yours
-* blame is invalid
+## Contributing
 
-Discomfort is confirmation.
+See `CONTRIBUTING.md`.
 
----
+## License
 
-Guillotine is working if you feel resistance.
-
----
-
-## Responsibility Boundary
-
-This software is provided under the MIT License.
-
-The MIT License permits use, copying, modification, and redistribution of the code, but it does not provide assurance, certification, audit defense, operational guarantees, or liability coverage.
-
-Use of this software in environments where failure, compliance, legal exposure, or irreversible decisions matter requires an accountable party.
-
-The original maintainer is available for assurance, adaptation, and responsibility when such accountability is required.
-
-Contact: contact@speedkit.eu
-
-Authoritative signed records are issued separately and are not produced by the software.
+MIT. See `LICENSE`.
