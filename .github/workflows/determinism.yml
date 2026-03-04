@@ -1,89 +1,91 @@
 name: Determinism Check
 
 on:
-  push:
   pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+env:
+  LC_ALL: C
+  TZ: UTC
 
 jobs:
-  determinism:
+  append-only:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for deletions in index.html
+        run: |
+          # Get diff of index.html
+          DELETED=$(git diff origin/main...HEAD -- index.html | grep "^-" | grep -v "^---" | wc -l)
+          
+          if [ "$DELETED" -gt 0 ]; then
+            echo "FAIL: Deletions detected in index.html"
+            echo "This index is append-only. Deletions are not allowed."
+            git diff origin/main...HEAD -- index.html | grep "^-" | grep -v "^---"
+            exit 1
+          fi
+          
+          echo "PASS: No deletions detected"
+
+  whitespace-check:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Block HTML reformatting
+        run: |
+          # Check for whitespace-only changes
+          CONTENT_CHANGES=$(git diff origin/main...HEAD -- index.html | grep "^[+-]" | grep -v "^[+-][+-][+-]" | grep -v "^[+-]\s*$" | wc -l)
+          TOTAL_CHANGES=$(git diff origin/main...HEAD -- index.html | grep "^[+-]" | grep -v "^[+-][+-][+-]" | wc -l)
+          
+          if [ "$TOTAL_CHANGES" -gt 0 ] && [ "$CONTENT_CHANGES" -eq 0 ]; then
+            echo "FAIL: Whitespace-only changes detected"
+            echo "HTML reformatting is not allowed"
+            exit 1
+          fi
+          
+          echo "PASS: No whitespace-only changes"
+
+  checksum-verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
-      - name: Test empty stdin → deterministic INVALID
+      - name: Verify index checksum
         run: |
-          set -eu
-          EXIT_CODE=0
-          ./guillotine.sh < /dev/null > output.txt 2>&1 || EXIT_CODE=$?
+          ACTUAL=$(sha256sum index.html | cut -d' ' -f1)
+          EXPECTED=$(cat INDEX_CHECKSUM.txt | cut -d' ' -f1)
           
-          if [ "$EXIT_CODE" -eq 0 ]; then
-            echo "FAIL: Empty stdin should not succeed"
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "FAIL: Index checksum mismatch"
+            echo "Expected: $EXPECTED"
+            echo "Actual: $ACTUAL"
             exit 1
           fi
-          echo "PASS: Empty stdin rejected with exit code $EXIT_CODE"
+          
+          echo "PASS: Index checksum verified"
 
-      - name: Test determinism (run twice)
-        run: |
-          set -eu
-          echo "test input" | ./guillotine.sh > output1.txt 2>&1 || true
-          echo $? > exit1.txt
-          
-          echo "test input" | ./guillotine.sh > output2.txt 2>&1 || true
-          echo $? > exit2.txt
-          
-          if ! diff output1.txt output2.txt; then
-            echo "FAIL: stdout differs"
-            exit 1
-          fi
-          
-          if ! diff exit1.txt exit2.txt; then
-            echo "FAIL: exit code differs"
-            exit 1
-          fi
-          
-          echo "PASS: determinism verified"
-
-      - name: Test no state mutation
-        run: |
-          set -eu
-          # Capture filesystem state
-          find . -type f | sort > before.txt
-          
-          echo "test" | ./guillotine.sh > /dev/null 2>&1 || true
-          
-          # Compare filesystem state
-          find . -type f | sort > after.txt
-          
-          if ! diff before.txt after.txt; then
-            echo "FAIL: filesystem mutated"
-            exit 1
-          fi
-          
-          echo "PASS: no state mutation"
-
-      - name: Test env isolation
-        run: |
-          set -eu
-          env | sort > env_before.txt
-          echo "test" | ./guillotine.sh > /dev/null 2>&1 || true
-          env | sort > env_after.txt
-          
-          if ! diff env_before.txt env_after.txt; then
-            echo "FAIL: environment mutated"
-            exit 1
-          fi
-          echo "PASS: no env mutation"
-
-  version-lock:
+  failure-codes-integrity:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
-      - name: Verify VERSION is locked at v0.0.0
+      - name: Verify FAILURE_CODES.json checksum
         run: |
-          VERSION=$(head -1 VERSION)
-          if [ "$VERSION" != "v0.0.0" ]; then
-            echo "FAIL: VERSION must be v0.0.0, got $VERSION"
-            exit 1
+          EXPECTED=$(cat .failure_codes_checksum)
+          ACTUAL=$(sha256sum FAILURE_CODES.json | cut -d' ' -f1)
+          
+          if [ "$EXPECTED" != "$ACTUAL" ]; then
+            echo "FAIL: FAILURE_CODES.json has been modified"
+            exit 5
           fi
-          echo "PASS: VERSION locked at v0.0.0"
+          echo "PASS: FAILURE_CODES.json checksum verified"
