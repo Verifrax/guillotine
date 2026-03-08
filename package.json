@@ -1,0 +1,26 @@
+{
+  "name": "@verifrax/guillotine",
+  "version": "0.1.0",
+  "description": "Verifrax primitive — termination primitive for deterministic irreversible systems.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Verifrax/guillotine.git"
+  },
+  "homepage": "https://github.com/Verifrax/guillotine#readme",
+  "bugs": {
+    "url": "https://github.com/Verifrax/guillotine/issues"
+  },
+  "bin": {
+    "guillotine": "guillotine.sh"
+  },
+  "files": [
+    "guillotine.sh",
+    "README.md",
+    "LICENSE",
+    "VERSION"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

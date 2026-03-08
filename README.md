@@ -1,111 +1,148 @@
-```
-PRIM-001
-GUILLOTINE
-Irreversible execution
+# GUILLOTINE
 
-STATUS: REGISTERED
-REGISTRY: https://speedkit.eu
-SNAPSHOT: https://speedkit.eu/REGISTRY_SNAPSHOT.json
-```
+Primitive ID: PRIM-008  
+Package: @verifrax/guillotine  
+Binary: guillotine
 
-Registered artifact. Identity governed by SPEEDKIT registry.
-
-STATUS: FINAL
+Verifrax primitive — termination primitive for deterministic irreversible systems.
 
 ---
 
-Guillotine enforces decisions you already made and failed to execute.
+## Status
 
-It is a **Claude Code–native execution utility**.
-It is not configurable.
-It does not ask questions.
-It does not wait for certainty.
+Current release status: pre-stable primitive release line.
 
-If output is incomplete, speculative, misaligned, or weak,
-**Guillotine deletes it. Immediately. Permanently.**
+Canonical release target:
 
----
+package version: 0.1.0  
+tag: v0.1.0
 
-## Philosophy
-
-Guillotine exists to **force execution where intent already exists**.
-
-It is designed for moments where:
-
-* A decision has been made
-* Delay has become avoidance
-* Reversibility is the enemy
-
-Guillotine does not help you decide.
-It ends the opportunity to hesitate.
+GUILLOTINE is part of the Verifrax primitive layer and follows the canonical primitive governance, naming, version, and packaging rules.
 
 ---
 
-## Behavior
+## Purpose
 
-* Detects any uncommitted or unresolved state
-* Deletes it without inspection
-* Leaves the repository intentionally scarred
-* Exits non-zero with intent
+GUILLOTINE terminates lifecycle state after origin, custody, time, boundary, verification, attestation, and judgment have already been completed.
 
-No retries.
-No previews.
-No recovery.
+Once a system has established origin, preserved custody, fixed temporal order, enforced operational boundaries, completed verification, produced attestation, and rendered judgment, it still needs a final primitive that can irreversibly terminate the lifecycle under deterministic rules. GUILLOTINE exists to perform that role.
+
+It does not establish origin. It does not preserve custody. It does not set time boundaries. It does not enforce boundaries. It does not perform verification. It does not attest. It does not judge. Its role is narrower: final irreversible termination.
 
 ---
 
-## Non-Features
+## What This Primitive Does
 
-* No flags
-* No modes
-* No configuration
-* No safety
-* No discussion
+- terminates lifecycle state after deterministic judgment
+- produces final irreversible termination output
+- closes the primitive chain with a deterministic final state
 
-Anything reversible is rejected by design.
+---
+
+## What This Primitive Does Not Do
+
+- does not establish first origin
+- does not preserve custody continuity
+- does not fix temporal ordering
+- does not enforce operational boundaries
+- does not perform primary verification itself
+- does not create attestation witness state
+- does not render judgment
+
+---
+
+## Behavioral Contract
+
+Invocation model:
+
+executable: guillotine  
+package: @verifrax/guillotine  
+runtime: CLI-first
+
+The primitive operates only after origin, custody, time, boundary, verification, attestation, and judgment are already complete.
+
+If no stable judgment state exists, GUILLOTINE must not fabricate termination.
+
+Exit codes:
+
+0 — termination completed successfully  
+non-zero — invocation failed or contract violated
 
 ---
 
 ## Usage
 
-Drop `guillotine.sh` into a git repository.
+Install:
 
-Run it.
+npm install -g @verifrax/guillotine
 
-```sh
-./guillotine.sh
-```
+Execute:
 
-If you pause, abort.
+guillotine artifact.json
 
----
+stdin example:
 
-## Contract
-
-You run Guillotine knowing:
-
-* loss is expected
-* responsibility is yours
-* blame is invalid
-
-Discomfort is confirmation.
+cat artifact.json | guillotine
 
 ---
 
-Guillotine is working if you feel resistance.
+## Determinism Guarantees
+
+For identical canonical input, GUILLOTINE must produce identical termination output.
+
+No hidden environmental state may influence the result.
+
+GUILLOTINE assumes all prior primitives have already constrained origin, custody, time, boundary, verification, attestation, and judgment. It is the final primitive in the chain and must not re-open prior state.
 
 ---
 
-## Responsibility Boundary
+## Security Model
 
-This software is provided under the MIT License.
+GUILLOTINE protects against ambiguity in final lifecycle termination.
 
-The MIT License permits use, copying, modification, and redistribution of the code, but it does not provide assurance, certification, audit defense, operational guarantees, or liability coverage.
+Its security value is to ensure that final closure is rendered from already-determined upstream state under deterministic rules. It does not replace earlier primitives and must not mutate prior evidentiary meaning.
 
-Use of this software in environments where failure, compliance, legal exposure, or irreversible decisions matter requires an accountable party.
+---
 
-The original maintainer is available for assurance, adaptation, and responsibility when such accountability is required.
+## Relationship to Other Primitives
 
-Contact: contact@speedkit.eu
+Canonical primitive order:
 
-Authoritative signed records are issued separately and are not produced by the software.
+1 originseal  
+2 archicustos  
+3 kairoclasp  
+4 limenward  
+5 validexor  
+6 attestorium  
+7 irrevocull  
+8 guillotine
+
+Repositories:
+
+https://github.com/Verifrax/originseal  
+https://github.com/Verifrax/archicustos  
+https://github.com/Verifrax/kairoclasp  
+https://github.com/Verifrax/limenward  
+https://github.com/Verifrax/validexor  
+https://github.com/Verifrax/attestorium  
+https://github.com/Verifrax/irrevocull  
+https://github.com/Verifrax/guillotine
+
+---
+
+## Installation
+
+npm install -g @verifrax/guillotine
+
+command -v guillotine
+
+Repository:
+- GitHub: https://github.com/Verifrax/guillotine
+- Package: @verifrax/guillotine
+- Binary: guillotine
+
+---
+
+## License
+
+MIT
