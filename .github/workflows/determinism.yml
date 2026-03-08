@@ -46,19 +46,23 @@ jobs:
       - name: Test no state mutation
         run: |
           set -eu
-          # Capture filesystem state
-          find . -type f | sort > before.txt
-          
+          TMPDIR="${RUNNER_TEMP:-/tmp}/guillotine-mut-${RANDOM}"
+          mkdir -p "$TMPDIR"
+          cp -f ./guillotine.sh "$TMPDIR/"
+          cd "$TMPDIR"
+          chmod +x ./guillotine.sh
+
+          BEFORE="$(mktemp)"
+          AFTER="$(mktemp)"
+          find . -maxdepth 1 -type f | LC_ALL=C sort > "$BEFORE"
           echo "test" | ./guillotine.sh > /dev/null 2>&1 || true
-          
-          # Compare filesystem state
-          find . -type f | sort > after.txt
-          
-          if ! diff before.txt after.txt; then
+          find . -maxdepth 1 -type f | LC_ALL=C sort > "$AFTER"
+
+          if ! diff "$BEFORE" "$AFTER"; then
             echo "FAIL: filesystem mutated"
             exit 1
           fi
-          
+
           echo "PASS: no state mutation"
 
       - name: Test env isolation
