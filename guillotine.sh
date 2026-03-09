@@ -5,6 +5,15 @@
 
 set -eu
 
+# --- Input -----------------------------------------------------------------
+
+INPUT="$(cat || true)"
+
+[ -z "$INPUT" ] && {
+  printf '%s\n' "INVALID"
+  exit 1
+}
+
 # --- Preconditions ---------------------------------------------------------
 
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || {
