@@ -1,0 +1,51 @@
+name: Determinism Check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+env:
+  LC_ALL: C
+  TZ: UTC
+
+jobs:
+  determinism:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Determinism (stdout)
+        shell: bash
+        run: |
+          set -euo pipefail
+          TOOL="./guillotine.sh"
+          if [ ! -f "$TOOL" ]; then
+            echo "FAIL: tool not found: $TOOL"
+            ls -la
+            exit 2
+          fi
+          chmod +x "$TOOL" || true
+          out1="$(mktemp)"; out2="$(mktemp)"
+          ("$TOOL" || true) | tr -d "\r" > "$out1"
+          ("$TOOL" || true) | tr -d "\r" > "$out2"
+          if ! cmp -s "$out1" "$out2"; then
+            echo "FAIL: nondeterministic stdout for $TOOL"
+            echo "--- run1"; sed -n "1,200p" "$out1" || true
+            echo "--- run2"; sed -n "1,200p" "$out2" || true
+            exit 1
+          fi
+          echo "PASS: deterministic stdout for $TOOL"
+
+  version-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Verify VERSION is locked at v0.0.0
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f VERSION
+          VERSION="$(head -1 VERSION)"
+          test "$VERSION" = "v0.0.0"
+          echo "PASS: VERSION locked at v0.0.0"
