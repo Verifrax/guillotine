@@ -36,3 +36,16 @@ jobs:
             exit 1
           fi
           echo "PASS: deterministic stdout for $TOOL"
+
+  version-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Verify VERSION is locked at v0.0.0
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f VERSION
+          VERSION="$(head -1 VERSION)"
+          test "$VERSION" = "v0.0.0"
+          echo "PASS: VERSION locked at v0.0.0"
