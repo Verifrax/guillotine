@@ -1,12 +1,6 @@
 # GUILLOTINE
 
-Primitive ID: PRIM-008  
-Package: @verifrax/guillotine  
-Binary: guillotine
-
-Verifrax primitive — termination primitive for deterministic irreversible systems.
-
----
+GUILLOTINE is the Verifrax terminal-cutoff primitive: the bounded primitive surface for cutoff and terminal-stop handling without becoming authored protocol source, authority issuance, governed execution, public verification, proof publication, archive/reference, or intake.
 
 ## Proof artifacts
 
@@ -30,146 +24,115 @@ This repository is part of the VERIFRAX proof perimeter.
 
 ## Status
 
-Current release status: pre-stable primitive release line.
+* Surface class: terminal-cutoff primitive
+* Repository class: primitive package surface
+* Public host ownership: none
+* Package: `@verifrax/guillotine`
+* Binary: `guillotine`
+* Current repository posture: live primitive boundary
+* License: MIT License
 
-Canonical release target:
+## Boundary
 
-package version: 0.1.0  
-tag: v0.1.0
+This repository owns the terminal-cutoff primitive only.
 
-GUILLOTINE is part of the Verifrax primitive layer and follows the canonical primitive governance, naming, version, and packaging rules.
+It defines bounded cutoff and terminal-stop behavior as a primitive.
+It does not author normative source material.
+It does not issue authority.
+It does not execute governed actions.
+It does not verify published material.
+It does not publish proof.
+It does not serve as archive/reference.
+It does not operate intake.
+It does not replace adjacent sovereign boundaries.
 
----
+## What it does
 
-## Purpose
+- defines the terminal-cutoff primitive for bounded Verifrax use
+- preserves cutoff semantics as a primitive rather than a surface takeover
+- keeps primitive behavior inspectable and deterministic
+- supports adjacent repositories without claiming system-wide authority
+- anchors terminal cutoff meaning as a primitive boundary
 
-GUILLOTINE terminates lifecycle state after origin, custody, time, boundary, verification, attestation, and judgment have already been completed.
+## What it does not do
 
-Once a system has established origin, preserved custody, fixed temporal order, enforced operational boundaries, completed verification, produced attestation, and rendered judgment, it still needs a final primitive that can irreversibly terminate the lifecycle under deterministic rules. GUILLOTINE exists to perform that role.
-
-It does not establish origin. It does not preserve custody. It does not set time boundaries. It does not enforce boundaries. It does not perform verification. It does not attest. It does not judge. Its role is narrower: final irreversible termination.
-
----
-
-## What This Primitive Does
-
-- terminates lifecycle state after deterministic judgment
-- produces final irreversible termination output
-- closes the primitive chain with a deterministic final state
-
----
-
-## What This Primitive Does Not Do
-
-- does not establish first origin
-- does not preserve custody continuity
-- does not fix temporal ordering
-- does not enforce operational boundaries
-- does not perform primary verification itself
-- does not create attestation witness state
-- does not render judgment
-
----
-
-## Behavioral Contract
-
-Invocation model:
-
-executable: guillotine  
-package: @verifrax/guillotine  
-runtime: CLI-first
-
-The primitive operates only after origin, custody, time, boundary, verification, attestation, and judgment are already complete.
-
-If no stable judgment state exists, GUILLOTINE must not fabricate termination.
-
-Exit codes:
-
-0 — termination completed successfully  
-non-zero — invocation failed or contract violated
-
----
-
-## Usage
-
-Install:
-
-npm install -g @verifrax/guillotine
-
-Execute:
-
-guillotine artifact.json
-
-stdin example:
-
-cat artifact.json | guillotine
-
----
-
-## Determinism Guarantees
-
-For identical canonical input, GUILLOTINE must produce identical termination output.
-
-No hidden environmental state may influence the result.
-
-GUILLOTINE assumes all prior primitives have already constrained origin, custody, time, boundary, verification, attestation, and judgment. It is the final primitive in the chain and must not re-open prior state.
-
----
-
-## Security Model
-
-GUILLOTINE protects against ambiguity in final lifecycle termination.
-
-Its security value is to ensure that final closure is rendered from already-determined upstream state under deterministic rules. It does not replace earlier primitives and must not mutate prior evidentiary meaning.
-
----
-
-## Relationship to Other Primitives
-
-Canonical primitive order:
-
-1 originseal  
-2 archicustos  
-3 kairoclasp  
-4 limenward  
-5 validexor  
-6 attestorium  
-7 irrevocull  
-8 guillotine
-
-Repositories:
-
-https://github.com/Verifrax/originseal  
-https://github.com/Verifrax/archicustos  
-https://github.com/Verifrax/kairoclasp  
-https://github.com/Verifrax/limenward  
-https://github.com/Verifrax/validexor  
-https://github.com/Verifrax/attestorium  
-https://github.com/Verifrax/irrevocull  
-https://github.com/Verifrax/guillotine
-
----
-
-## Installation
-
-npm install -g @verifrax/guillotine
-
-command -v guillotine
-
-Repository:
-- GitHub: https://github.com/Verifrax/guillotine
-- Package: @verifrax/guillotine
-- Binary: guillotine
-
----
-
-## License
-
-MIT
+- not authored protocol source; that belongs to VERIFRAX
+- not authority issuance; that belongs to AUCTORISEAL
+- not governed execution; that belongs to CORPIFORM
+- not public verification; that belongs to VERIFRAX-verify
+- not proof publication; that belongs to proof
+- not archive/reference; that belongs to SIGILLARIUM
+- not intake; that belongs to apply
+- not constitutional doctrine; that belongs to SYNTAGMARIUM
+- not canonical world-state; that belongs to ORBISTIUM
+- not reconciliation or repair; that belongs to CONSONORIUM
+- not sovereign cognition; that belongs to TACHYRIUM
 
 ## Adjacent sovereign surfaces
 
-This repository is part of the Verifrax sovereign stack and remains bounded relative to:
+- `VERIFRAX` — authored protocol and evidence-root boundary
+- `AUCTORISEAL` — authority issuance
+- `CORPIFORM` — governed execution
+- `VERIFRAX-verify` — public verification
+- `proof` — proof publication
+- `SIGILLARIUM` — archive/reference
+- `apply` — intake
 
-- **[ANAGNORIUM](https://github.com/Verifrax/ANAGNORIUM)** for terminal recognition
-- **[REGRESSORIUM](https://github.com/Verifrax/REGRESSORIUM)** for terminal recourse
+GUILLOTINE is a primitive.
+It does not become the repositories that consume it.
+
+## Public surface
+
+The public surface of this repository is its repository identity, README boundary, package surface, binary surface, and primitive materials carried by this repository.
+
+Publication here is not authored source.
+Publication here is not authority.
+Publication here is not execution.
+Publication here is not verification.
+Publication here is not proof publication.
+Publication here is not archive/reference.
+Publication here is not intake.
+
+## Package / host / repo truth
+
+Repository truth for GUILLOTINE lives in this repository.
+
+Package truth for this primitive is `@verifrax/guillotine`.
+Binary truth for this primitive is `guillotine`.
+Package, binary, and repository truth are related but not interchangeable.
+
+## Cutoff meaning in-system
+
+Cutoff in-system means the stack can point to GUILLOTINE and say that a bounded terminal-cutoff primitive belongs to this boundary.
+
+Cutoff here terminates.
+Cutoff here does not author.
+Cutoff here does not issue authority.
+Cutoff here does not execute.
+Cutoff here does not verify.
+Cutoff here does not publish proof.
+
+That does not by itself mean:
+
+- the primitive became authored protocol source
+- the primitive issued authority
+- the primitive executed a governed action
+- the primitive verified truth
+- the primitive published proof
+- the primitive replaced archive/reference
+- the primitive replaced intake
+- the primitive replaced the evidence-root repository
+
+## Not this
+
+GUILLOTINE is not authored protocol source.
+GUILLOTINE is not authority issuance.
+GUILLOTINE is not governed execution.
+GUILLOTINE is not public verification.
+GUILLOTINE is not proof publication.
+GUILLOTINE is not archive/reference.
+GUILLOTINE is not intake.
+
+## License
+
+MIT License
