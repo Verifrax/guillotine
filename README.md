@@ -1,5 +1,9 @@
 # GUILLOTINE
 
+Package: @verifrax/guillotine
+Binary: guillotine
+Repository: Verifrax/guillotine
+
 GUILLOTINE is the Verifrax terminal-cutoff primitive: the bounded primitive surface for cutoff and terminal-stop handling without becoming authored protocol source, authority issuance, governed execution, public verification, proof publication, archive/reference, or intake.
 
 ## Proof artifacts
