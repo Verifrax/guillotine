@@ -30,7 +30,7 @@ This repository is part of the VERIFRAX proof perimeter.
 * Package: `@verifrax/guillotine`
 * Binary: `guillotine`
 * Current repository posture: live primitive boundary
-* License: MIT License
+* License: Apache License Version 2.0
 
 ## Boundary
 
@@ -135,4 +135,4 @@ GUILLOTINE is not intake.
 
 ## License
 
-MIT License
+Apache License Version 2.0
